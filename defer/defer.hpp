@@ -2,16 +2,16 @@
 
 #include <bits/stdc++.h>
 
-class DeferHelper
-{
+class defer_helper {
 public:
-    DeferHelper(const DeferHelper& cb): m_cb(cb) {}
-    DeferHelper(DeferHelper&& cb): m_cb(std::move(cb)) {}
-    virtual ~DeferHelper() {
+    defer_helper(const defer_helper &cb) : m_cb(cb) {}
+    defer_helper(defer_helper &&cb) : m_cb(std::move(cb)) {}
+    virtual ~defer_helper() {
         if (m_cb) {
             m_cb();
         }
     }
+
 private:
     std::function<void()> m_cb;
 };
@@ -25,4 +25,4 @@ private:
 #endif
 
 #undef defer
-#define defer(code) DeferHelper CONNECT_STR(defer, __LINE__)([&]{code;})
+#define defer(code) defer_helper CONNECT_STR(defer, __LINE__)([&] { code; })

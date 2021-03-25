@@ -10,3 +10,11 @@
     cout << 2 << endl;
 }
 ```
+### nolock_queue
+支持多对多的无锁队列。**感谢@Hecate2提供的思路**
+```c++
+nolock_queue<int> q;
+while (!q.push(1));
+int t;
+while (!q.pop(t));
+```
